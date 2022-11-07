@@ -1,0 +1,61 @@
+services:
+
+  db:
+    container_name: postgresql
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: db_procedure
+
+  procedure-type:
+    container_name: procedure-type
+    image: joseangel19/ms-procedure-type:v1
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      SPRING_R2DBC_URL: r2dbc:postgresql://db:5432/db_procedure
+      SPRING_R2DBC_USERNAME: postgres
+      SPRING_R2DBC_PASSWORD: 123456
+
+  institute:
+    container_name: institute
+    image: joseangel19/ms-institute:v2
+    ports:
+      - 8081:8081
+    depends_on:
+      - db
+    environment:
+      SPRING_R2DBC_URL: r2dbc:postgresql://db:5432/db_procedure
+      SPRING_R2DBC_USERNAME: postgres
+      SPRING_R2DBC_PASSWORD: 123456
+
+  phase:
+    container_name: phase
+    image: joseangel19/ms-phase:v2
+    ports:
+      - 8082:8082
+    depends_on:
+      - db
+    environment:
+      SPRING_R2DBC_URL: r2dbc:postgresql://db:5432/db_procedure
+      SPRING_R2DBC_USERNAME: postgres
+      SPRING_R2DBC_PASSWORD: 123456
+
+#  procedure-config:
+#    container_name: procedure-config
+#    image: joseangel19/ms-procedure-config:v1
+#    ports:
+#      - 9000:9000
+#    depends_on:
+#      - db
+#      - procedure-type
+#      - institute
+#      - phase
+#    environment:
+#      SPRING_R2DBC_URL: r2dbc:postgresql://db:5432/db_procedure
+#      SPRING_R2DBC_USERNAME: postgres
+#      SPRING_R2DBC_PASSWORD: 123456
