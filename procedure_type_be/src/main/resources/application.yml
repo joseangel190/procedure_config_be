@@ -1,0 +1,5 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/db_procedure_type
+    username: postgres
+    password: 123456
