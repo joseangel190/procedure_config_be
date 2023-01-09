@@ -1,16 +1,7 @@
 spring:
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/db_procedure
-    username: postgres
-    password: 123456
-
-  #  r2dbc:
-  #    properties:
-  #      sslMode: REQUIRE
-  #    url: r2dbc:pool:postgres://pgsqlserver123.postgres.database.azure.com:5432/postgres
-  #    username: postgressql@pgsqlserver123
-  #    password: Java2020@
-
+    url: ${DB_URL}
+    username: ${DB_USR}
+    password: ${DB_PAS}
 server:
   port: 9000
-
